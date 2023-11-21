@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Form Pendaftaran Pasien</title>
+<style>
+body {
+ font-family: Arial, sans-serif;
+}
+form {
+ width: 300px;
+ margin: 0 auto;
+}
+form input {
+ margin-bottom: 10px;
+ padding: 10px;
+}
+form button {
+ padding: 10px;
+ margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>Form Pendaftaran Pasien</h2>
+
+<form id="form">
+ <label for="nama">Nama Lengkap:</label><br>
+ <input type="text" id="nama" name="nama" required><br>
+  
+ <label for="nik">NIK:</label><br>
+ <input type="text" id="nik" name="nik" required><br>
+  
+ <label for="jenis_kelamin">Jenis Kelamin:</label><br>
+ <select id="jenis_kelamin" name="jenis_kelamin" required>
+    <option value="Laki-laki">Laki-laki</option>
+    <option value="Perempuan">Perempuan</option>
+ </select><br>
+  
+ <label for="alamat">Alamat:</label><br>
+ <input type="text" id="alamat" name="alamat" required><br>
+  
+ <label for="tanggal_lahir">Tanggal Lahir:</label><br>
+ <input type="date" id="tanggal_lahir" name="tanggal_lahir" required><br>
+  
+ <label for="nomor_telepon">Nomor Telepon:</label><br>
+ <input type="text" id="nomor_telepon" name="nomor_telepon" required><br>
+  
+ <button type="button" onclick="generatePDF()">Cetak ke PDF</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script>
+function generatePDF() {
+    var doc = new jsPDF();
+
+    var nama = document.getElementById("nama").value;
+    var nik = document.getElementById("nik").value;
+    var jenis_kelamin = document.getElementById("jenis_kelamin").value;
+    var alamat = document.getElementById("alamat").value;
+    var tanggal_lahir = document.getElementById("tanggal_lahir").value;
+    var nomor_telepon = document.getElementById("nomor_telepon").value;
+
+    doc.setFontSize(14);
+    doc.text(50, 30, 'Form Pendaftaran Pasien');
+    doc.setFontSize(12);
+    doc.text(50, 50, 'Nama Lengkap: ' + nama);
+    doc.text(50, 60, 'NIK: ' + nik);
+    doc.text(50, 70, 'Jenis Kelamin: ' + jenis_kelamin);
+    doc.text(50, 80, 'Alamat: ' + alamat);
+    doc.text(50, 90, 'Tanggal Lahir: ' + tanggal_lahir);
+    doc.text(50, 100, 'Nomor Telepon: ' + nomor_telepon);
+
+    doc.save('form_pendaftaran_pasien.pdf');
+}
+</script>
+
+</body>
+</html>
